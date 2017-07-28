@@ -38,6 +38,7 @@
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/spring-web-4.3.2.RELEASE.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/spring-webmvc-4.3.2.RELEASE.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/ojdbc6.jar"/>
+	<classpathentry exported="true" kind="lib" path="WebContent/WEB-INF/lib/commons-lang3-3.5.jar" sourcepath="E:/java/jar包/commons-lang3-3.5.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

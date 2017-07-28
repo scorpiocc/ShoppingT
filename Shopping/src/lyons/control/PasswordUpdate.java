@@ -18,6 +18,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang3.StringUtils;
+
 import lyons.db.DbClose;
 import lyons.db.DbConn;
 import lyons.entity.Register;
@@ -78,9 +80,12 @@ public class PasswordUpdate extends HttpServlet
 			{
 				username = "";
 			}
-			if (userpass==""|userpass==null)
+		//	if (userpass==""|userpass==null)
+			if (StringUtils.isBlank(userpass))
 			{
+				
 				userpass = "error";
+				System.out.println("密码为空");
 			}
 
 			String regex = "[\\d]{11}";
