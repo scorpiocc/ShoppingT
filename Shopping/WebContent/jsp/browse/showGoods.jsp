@@ -37,6 +37,8 @@
   		    </tr>
   		<% 
   			CachedRowSetImpl rowSet = goods.getRowSet();// 获取储存在模型中的行信息
+  			String keyWord = request.getParameter("keyWord");
+  			out.print("keyWord="+keyWord);
   			if(rowSet==null)
   			{
   				out.print("商品数据库中没有哦");
@@ -44,15 +46,18 @@
   			}
   			rowSet.last();
   			int totalRecord = rowSet.getRow();             //所查询的商品全部记录
+  			out.println("所查询的商品全部记录"+totalRecord);
   			int PageSize = goods.getPageSize();            //每页显示的记录数
+  			out.println("每页显示的记录数"+PageSize);
   			int totalPages = goods.getTotalPage();         //总页数
   			int currentPage = goods.getCurrentPage();      //当前页码数
+  			out.print("当前页码数"+currentPage);
   			
   			
   			//检查是否用户自定义了页数
   			if(request.getParameter("newPageSize")!=null)
   			{
-  			   PageSize = Integer.parseInt(request.getParameter("newPageSize"));
+  			   PageSize = Integer.parseInt(request.getParameter("newPageSize"));    //PageSize每页显示的记录数
   			   currentPage = 1;//从第一页开始显示
   			}
   			//检查是否用户点击了下、上一页操作
@@ -69,27 +74,28 @@
   			}
   			
   			//分页
-  			if(totalRecord % PageSize == 0)
+  			if(totalRecord % PageSize == 0)   //所查询的商品全部记录 /每页显示记录数
   			{
-  			   totalPages = totalRecord/PageSize;
+  			   totalPages = totalRecord/PageSize;   //总页数 = 查询条数/显示条数
   			}else
   			     {
   			       totalPages = totalRecord/PageSize+1;
+  			       out.print("总页数fenye-->"+totalPages);
   			     }
-  			goods.setCurrentPage(currentPage);
-  			goods.setPageSize(PageSize);
-  			goods.setTotalPage(totalPages);
+  			goods.setCurrentPage(currentPage);  //更新当前页码数
+  			goods.setPageSize(PageSize);        //更新每页显示记录数
+  			goods.setTotalPage(totalPages);		//更新总页数
   			
   			if(totalPages >= 1)
   			{
   			   if(goods.getCurrentPage()<1)
   			   {
-  			       goods.setCurrentPage(goods.getTotalPage());//点击上一页提交时CurrentPage+1，但当前页面已经是最后一页，会出现此表达式会成立
+  			       goods.setCurrentPage(goods.getTotalPage());//点击上一页提交时CurrentPage-1，但当前页面已经是最后一页，会出现此表达式会成立
   			   }
   			   
   			   if(goods.getCurrentPage()>goods.getTotalPage()) //点击下一页提交时CurrentPage+1，但当前页面已经是最后一页，会出现此表达式会成立
   			   {
-  			       goods.setCurrentPage(1);
+  			      goods.setCurrentPage(1);
   			   }
   			   
   			   int index = ((goods.getCurrentPage()-1)*PageSize)+1;
@@ -108,7 +114,7 @@
   			       
   			       String commodity = null;
   			       commodity = ID+","+name+","+made+","+price+","+number+","+pic+","+category;//尾缀#，便于计算购物车价格
-  			       commodity = commodity.replaceAll("\\p{Blank}","");
+  			       commodity = commodity.replaceAll("\\p{Blank}","");     // 替换成""      空格或制表符：[ \t]
   			       
   			       String shopCarButton = "<form action='lyons.goods/PutGoodsToCar' method='post'>"+
   			                       "<input type='hidden' name='GoodsCar' value="+commodity+">"+
@@ -131,19 +137,21 @@
   		%> 
   	</table>
   	
-  	<br><%= goods.getCurrentPage() %>/<%= goods.getTotalPage() %> 页
+  	<br><%= goods.getCurrentPage() %>/<%= goods.getTotalPage() %> 页 
   	
   	<table>
   	 <tr>
   	     <td>
   	         <form action="" method="post">
   	             <input type="hidden" name=currentPage value="<%= (currentPage-1) %>">
+  	             <input type="hidden" name = keyWord  value = "<%=keyWord%>"> 
   	             <input type="submit" value="上一页">
   	         </form>
   	     </td>
   	     <td>
   	         <form action="" method="post">
   	             <input type="hidden" name=currentPage value="<%= (currentPage+1) %>">
+  	             <input type="hidden" name = keyWord  value = "<%=keyWord%>"> 
   	             <input type="submit" value="下一页">
   	         </form>
   	     </td>
@@ -153,6 +161,7 @@
   	     <td><BR>
   	         <form action="" method="post">
   	            总计：<%= totalRecord %>条记录.每页显示<input type="text" name="newPageSize" value="<%= PageSize %>" size="2">条.
+  	            	<input type="hidden" name = keyWord  value = "<%=keyWord%>"> 
   	                 <input type="submit" value="确定">
   	         </form>
   	     </td>

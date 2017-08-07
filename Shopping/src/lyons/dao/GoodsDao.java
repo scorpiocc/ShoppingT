@@ -63,7 +63,7 @@ public class GoodsDao extends HttpServlet
 
 		String keyWord = "";
 		keyWord = request.getParameter("keyWord");
-		System.out.println(keyWord);
+		
 		queryGoods(request, response, key,keyWord);
 	}
 
@@ -92,13 +92,12 @@ public class GoodsDao extends HttpServlet
 		ResultSet rs = null;
 		Goods goods = null;
 		Login username = null;
-//		OrderForm orderForm = null;
+		
 
 		HttpSession session = request.getSession(true);
 		username = (Login)session.getAttribute("loginBean");
 		goods = (Goods)session.getAttribute("goods");
-//		orderForm = (OrderForm)session.getAttribute("orderForm");
-//		ArrayList<Goods> goodsList = new ArrayList<Goods>();
+
 		if (goods==null)
 		{
 			goods = new Goods();
@@ -109,11 +108,7 @@ public class GoodsDao extends HttpServlet
 		    username = new Login();
 		    session.setAttribute("username", username);
 		}
-//		if (orderForm==null)
-//		{
-//		    orderForm = new OrderForm();
-//		    session.setAttribute("orderForm", orderForm);
-//		}
+
 		  //判断用户是否登陆
 		  String user = "";
           user = username.getUsername();//登陆者的用户名
@@ -159,6 +154,7 @@ public class GoodsDao extends HttpServlet
                         try
                         {
                             pstmt = conn.prepareStatement(sqlShowGoodsByKey);
+                            System.out.println("keyWord --> "+keyWord);
                             pstmt.setString(1, keyWord);
                             rs = pstmt.executeQuery();
                             System.out.println("--2查看订单执行数据库操作--");
@@ -168,12 +164,13 @@ public class GoodsDao extends HttpServlet
                                 rowSet = new CachedRowSetImpl();
                                 rowSet.populate(rs);
                                 goods.setRowSet(rowSet);
-                                System.out.println("2已经从数据库中获取到值，并塞进行集");
+                                System.out.println("key=2,已经从数据库中获取到值，并塞进行集");
+                                request.setAttribute(keyWord, keyWord);
                                 request.getRequestDispatcher("/jsp/browse/showGoods.jsp").forward(request, response);
                             }else
                                 {
                                     out.print("<br><br><br><center>");
-                                    out.print("<font color=green> 亲,查询出错啦.更换关键字再次 </font>");
+                                    out.print("<font color=green> 亲,还没有此类商品噢,请更换关键字查询 </font>");
                                     out.print("<a href=/Adapter/jsp/browse/searchByKeyWord.jsp><font color=red size=6>查询</font></a>");
                                     out.print("</center>");
                                 }
@@ -225,7 +222,7 @@ public class GoodsDao extends HttpServlet
                     break;
 			case 4:
 			        StringBuffer url = request.getRequestURL();
-			        System.out.println("4324234=========="+url.toString());
+			        
 					//key=4 浏览商品
 					String sqlList= "select * from commodity";
 					try

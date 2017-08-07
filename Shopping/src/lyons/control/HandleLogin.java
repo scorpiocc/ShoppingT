@@ -59,6 +59,7 @@ public class HandleLogin extends HttpServlet
 		username = request.getParameter("username");
 		userpass = request.getParameter("userpass");
 		cookies = request.getParameter("isCookie");
+		System.out.println("name="+username+"  pass="+userpass+"  cookies="+cookies);
 		handleCookies(request,response,username,userpass,cookies);//处理cookies信息
 		
 		Connection conn = null;
@@ -185,11 +186,14 @@ public class HandleLogin extends HttpServlet
 	public void fail(HttpServletRequest request,
 			HttpServletResponse response,String backNews)
 	{
+		
 		try
 		{
 			PrintWriter out = response.getWriter();
+			out.print("<title>登陆失败</title>");
 			out.print(backNews+"<br>");
-			out.print("返回"+"<a href=/Adapter/jsp/join/login.jsp>登陆界面</a>");
+			out.print("正在返回"+"<a href=/Adapter/jsp/join/login.jsp>登陆界面</a>");
+			out.print("<meta http-equiv='refresh' content='3; url=../jsp/join/login.jsp'>");
 		} catch (IOException e)
 		{
 			e.printStackTrace();

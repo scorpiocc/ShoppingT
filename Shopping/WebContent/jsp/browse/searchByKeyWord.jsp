@@ -20,8 +20,7 @@
   <style type="text/css">
     body{background-color:  #008B8B;}
     .bg-div{position:relative;background-image: url(../../image/page/river.jpg);width:1228px;height:690px;margin: 0 auto;}
-    .logo{background-image: url(../../image/page/logo.png);height:53px;width: 107px; float: left;margin: -4px 18px 0 0;}
-    .search-form{float: left; background-color: #fff;padding:5px;}
+    .search-form{float: left; background-color: #fff;padding:5px;margin-left: 200px}
     .search-text{height:25px;line-height: 25px;float: left;width: 350px;border: 0;outline: none;}
     .search-button{background-image: url(../../image/page/search-button.png);width:29px;height:29px;float: left;border: 0}
     .search-box{position:absolute;top:150px;left: 200px; }
@@ -62,16 +61,17 @@
 			 <div class="suggest" id="search-suggest" style="display:none">
 			                <ul id="search-result">
 			                    <li> 运动鞋 </li>
+			                    <li> ipad</li>
 			                </ul>
 			</div>
  </body>
  <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
  <script>
- $('#search_input').bind('keyup',function(){
+/*   $('#search_input').bind('keyup',function(){
     var jqueryInput = $(this);
     var searchText = jqueryInput.val();
     $.get('http://api.bing.com/qsonhs.aspx?keyWord='+searchText);
- });
+ });  */
 $('#search-suggest').css({
     top:$('#search-form').offset().top+$('#search-form').height()+10,
     left:$('#search-form').offset().left

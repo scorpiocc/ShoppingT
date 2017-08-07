@@ -11,7 +11,7 @@
 <head>
 	<base href="<%=basePath%>">
 	
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>登陆</title>
 </head>
 <body>
@@ -23,10 +23,13 @@
 		String userpass = "";
 		Cookie[] cookies = null;
 		cookies = request.getCookies();
+		
 		if(cookies!=null && cookies.length>0)
 		{
 			for(Cookie c:cookies)
-			{
+			{	
+				//out.println("建:"+c.getName());
+				//out.println("值:"+URLDecoder.decode(c.getValue(),"UTF-8"));
 				if("username".equals(c.getName()))
 				{
 					username = URLDecoder.decode(c.getValue(),"UTF-8");//解码并取值、赋值

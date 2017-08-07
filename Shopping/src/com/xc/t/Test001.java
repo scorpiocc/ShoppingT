@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Test001 {
 	public static void main(String[] args) {
-		String a = "/DATA/apptemplate/demo///reportForm/user/charterOrder_AT/2017/07/31/5190020170731013559724.xls";
+		/*String a = "/DATA/apptemplate/demo///reportForm/user/charterOrder_AT/2017/07/31/5190020170731013559724.xls";
 		if(a.indexOf("charterOrder_AT")!=-1){ 
 			System.out.println("存在");
 		}else{
@@ -26,6 +26,7 @@ public class Test001 {
 	                System.out.print(array[i] + " ");
 	            }
 	        }
-	    
+	    */
+		System.out.println(17/5);
 	}
 }

@@ -43,16 +43,7 @@
 		<servlet-name>Log4JTestServlet</servlet-name>
 		<servlet-class>lyons.control.Log4JTestServlet</servlet-class>
 	</servlet>
-	<!--用来启动 log4jConfigLocation的servlet -->
-	<servlet>
-		<servlet-name>Log4JInitServlet</servlet-name>
-		<servlet-class>lyons.control.Log4JInitServlet</servlet-class>
-		<init-param>
-			<param-name>log4j-properties-location</param-name>
-			<param-value>/WEB-INF/classes/log4j.properties</param-value>
-		</init-param>
-		<load-on-startup>1</load-on-startup>
-	</servlet>
+
 
 	<!-- 分_______________割________________线 -->
 

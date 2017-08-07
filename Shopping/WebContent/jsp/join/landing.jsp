@@ -41,11 +41,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				1秒后跳转到首页.....
 				<%}
     	%>  	
-<%--
- 	
-				String content = 3+"; url="+"/navbar.jsp";
-				response.setHeader("refresh",content); 
-				
- --%>
+
   </body>
 </html>

@@ -32,7 +32,7 @@ public class PasswordMd5 {
         return md5;
     }
 	
-	public  String removeAllBlank(String s) {
+	/*public  String removeAllBlank(String s) {
         String newStr = "";
          // 将字符串转成字符数组
          char[] c = s.toCharArray();
@@ -44,7 +44,7 @@ public class PasswordMd5 {
              }
         }
          return newStr;
-  }
+  }*/
 
 
 }

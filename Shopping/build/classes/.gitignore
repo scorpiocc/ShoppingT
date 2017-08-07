@@ -1,5 +1,4 @@
-/lyons/
-/log4j.properties
-/com/
-/applicationContext-datasource.xml
 /applicationContext.xml
+/com/
+/log4j.properties
+/lyons/

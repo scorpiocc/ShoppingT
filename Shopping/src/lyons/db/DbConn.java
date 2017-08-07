@@ -7,8 +7,12 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+
+import org.apache.log4j.Logger;
+
 public class DbConn
 {
+	private static Logger logger= Logger.getLogger(DbConn.class);
 	public static Connection getConn()
 	{
 		Connection conn = null;
@@ -25,9 +29,11 @@ public class DbConn
 			} catch (ClassNotFoundException e)
 			{
 				e.printStackTrace();
+				logger.error("找不到driver类");
 			} catch (SQLException e)
 			{
 				e.printStackTrace();
+				logger.error("sql执行失败");
 			}
 			
 		return conn;

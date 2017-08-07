@@ -4,22 +4,22 @@ package lyons.entity;
 import com.sun.rowset.CachedRowSetImpl;
 
 /**
- * ��Ʒʵ����
+ * 商品实体类
  * @author lyons(zhanglei)
  *
  */
-public class Goods
+public class Goods 
 {
-
-	CachedRowSetImpl rowSet = null; //�������е��м�����
-
-	private int pageSize = 5;	//ÿҳ��ʾ��������¼(Ĭ��Ϊ5��)
-	private int currentPage = 1;//��ǰҳ��
-	private int totalRecord = 1;//�ܼ�¼��
-	private int totalPage = 1;	 //��ҳ��
+	
+	CachedRowSetImpl rowSet = null; //表中所有的行集对象
+	
+	private int pageSize = 5;	//每页显示多少条记录(默认为5条)
+	private int currentPage = 1;//当前页数
+	private int totalRecord = 1;//总记录数
+	private int totalPage = 1;	 //总页数
 	
 	public Goods(){}
-
+	
 	public Goods(CachedRowSetImpl rowSet, int pageSize, int currentPage,
 			int totalPRecord, int totalPage)
 	{
@@ -80,5 +80,5 @@ public class Goods
         this.totalPage = totalPage;
     }
 
-
+	
 }
