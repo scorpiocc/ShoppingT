@@ -46,12 +46,12 @@
   			}
   			rowSet.last();
   			int totalRecord = rowSet.getRow();             //所查询的商品全部记录
-  			out.println("所查询的商品全部记录"+totalRecord);
+  			//out.println("所查询的商品全部记录"+totalRecord);
   			int PageSize = goods.getPageSize();            //每页显示的记录数
-  			out.println("每页显示的记录数"+PageSize);
+  			//out.println("每页显示的记录数"+PageSize);
   			int totalPages = goods.getTotalPage();         //总页数
   			int currentPage = goods.getCurrentPage();      //当前页码数
-  			out.print("当前页码数"+currentPage);
+  			//out.print("当前页码数"+currentPage);
   			
   			
   			//检查是否用户自定义了页数
@@ -80,7 +80,7 @@
   			}else
   			     {
   			       totalPages = totalRecord/PageSize+1;
-  			       out.print("总页数fenye-->"+totalPages);
+  			       //out.print("总页数fenye-->"+totalPages);
   			     }
   			goods.setCurrentPage(currentPage);  //更新当前页码数
   			goods.setPageSize(PageSize);        //更新每页显示记录数
