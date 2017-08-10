@@ -20,7 +20,7 @@
 		<jsp:useBean id="userBean" class="com.xc.ssm.entity.Register" scope="request"/>
 		<% request.setCharacterEncoding("UTF-8"); %>
 		<div align="center">
-			<form action="<%= path %>/control.action" method="post">
+			<form action="<%= path %>/register/submit" method="post">
 				<table border="1" cellpadding="10" cellspacing="1">
 					<tr>
 						<td>用户姓名:<input name="username" placeholder="*必填"/></td>

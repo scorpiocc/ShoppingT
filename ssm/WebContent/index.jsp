@@ -38,7 +38,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     					   HttpSession s= request.getSession(true);
                            s.invalidate();
                         %>
-	     					<a href="<%= path %>/login">登录</a>or<a href="jsp/join/register.jsp">注册</a>
+	     					<a href="<%= path %>/login/index">登录</a>or<a href="<%= path %>/register/index">注册</a>
     					<%
     					return;
     					}

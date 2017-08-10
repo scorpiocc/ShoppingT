@@ -4,10 +4,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-public class HandlerJump {
-	@RequestMapping("/login")
-	public String HandleLogin(){
+@RequestMapping("/login")
+public class HandlerLogin {
+	@RequestMapping("/index")
+	public String Handlerlogin(){
 		return "join/login";
 	}
+	
 
 }
