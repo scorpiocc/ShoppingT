@@ -17,14 +17,17 @@ public class DbConn
 	{
 		Connection conn = null;
 		
-		String user 	= "scott";
-		String passwd	= "tiger";
-		String url = "jdbc:oracle:thin:@localhost:1521:orcl";
-		
+		//String user 	= "scott";
+		//String passwd	= "tiger";
+		//String url = "jdbc:oracle:thin:@localhost:1521:orcl";
+		  String user   = "scorpio";
+		  String passwd	= "111111";
+		  String url    = "jdbc:mysql://localhost:3306/ssm?useUnicode=true&characterEncoding=utf8";
 		//已加载驱动
 			try
 			{
-				Class.forName("oracle.jdbc.driver.OracleDriver");
+				//Class.forName("oracle.jdbc.driver.OracleDriver");
+				Class.forName("com.mysql.jdbc.Driver");
 				conn = DriverManager.getConnection(url,user,passwd);
 			} catch (ClassNotFoundException e)
 			{
