@@ -17,7 +17,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<meta http-equiv="expires" content="0">    
 	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 	<meta http-equiv="description" content="This is my page">
-	<meta http-equiv="refresh" content="1; url=<%= path %>/jsp/join/login.jsp"> 
+	<meta http-equiv="refresh" content="1; url=register/jumplogin"> 
 	
 	<!-- <link rel="stylesheet" type="text/css" href="<%= path %>/css/nav.css">  -->
 

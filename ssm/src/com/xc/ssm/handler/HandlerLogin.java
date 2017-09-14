@@ -8,7 +8,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class HandlerLogin {
 	@RequestMapping("/index")
 	public String Handlerlogin(){
-		return "join/login";
+		//return "join/login";
+		return "join/registerSuccess";
 	}
 	
 

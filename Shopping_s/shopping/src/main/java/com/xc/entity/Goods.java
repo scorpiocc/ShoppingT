@@ -1,4 +1,4 @@
-package lyons.entity;
+package com.xc.entity;
 
 
 import com.sun.rowset.CachedRowSetImpl;

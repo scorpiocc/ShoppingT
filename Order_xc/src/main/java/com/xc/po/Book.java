@@ -68,6 +68,6 @@ public class Book implements Serializable{
     }
 @Override
 public String toString() {
-return this.getTitle()+"---"+this.getId()+"----"+this.getPrice()+"--------";
+return this.getTitle()+"---"+this.getId()+"----"+this.getPrice()+"--------"+this.getPublishDate();
 }
 }

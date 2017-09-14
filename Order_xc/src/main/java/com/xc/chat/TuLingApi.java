@@ -39,12 +39,14 @@ public class TuLingApi {
 		                     "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1;SV1)");
 		             //建立连接
 		             connection.connect();
+		             /*  
 		          // 获取所有响应头字段
 		             Map<String, List<String>> map = connection.getHeaderFields();
-		             // 遍历所有的响应头字段，获取到cookies等
-		             /*for (String key : map.keySet()) {
+		              //遍历所有的响应头字段，获取到cookies等
+		             for (String key : map.keySet()) {
 		                 System.out.println(key + "--->" + map.get(key));
 		             }*/
+		             
 		             // 定义 BufferedReader输入流来读取URL的响应
 		             read = new BufferedReader(new InputStreamReader(
 		                     connection.getInputStream(),"UTF-8"));

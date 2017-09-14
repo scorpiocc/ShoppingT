@@ -45,7 +45,7 @@
 
 	
 	<div align="center">
-		<form action="<%= path %>/com.control/HandleLogin" method="post">
+		<form action="<%= path %>/register/index" method="post">
 		
 			<table border="0" cellpadding="15" cellspacing="1">
 				<tr>

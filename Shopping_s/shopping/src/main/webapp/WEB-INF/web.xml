@@ -1,121 +1,60 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns="http://java.sun.com/xml/ns/javaee"
-	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
-	version="2.5">
-	<servlet>
-		<servlet-name>HandleRegister</servlet-name>
-		<servlet-class>lyons.control.HandleRegister</servlet-class>
-	</servlet>
-	<servlet>
-		<servlet-name>HandleLogin</servlet-name>
-		<servlet-class>lyons.control.HandleLogin</servlet-class>
-	</servlet>
-	<servlet>
-		<servlet-name>GoodsDao</servlet-name>
-		<servlet-class>lyons.dao.GoodsDao</servlet-class>
-	</servlet>
-	<servlet>
-		<servlet-name>HandleExit</servlet-name>
-		<servlet-class>lyons.control.HandleExit</servlet-class>
-	</servlet>
-	<servlet>
-		<servlet-name>PasswordUpdate</servlet-name>
-		<servlet-class>lyons.control.PasswordUpdate</servlet-class>
-	</servlet>
-	<servlet>
-		<servlet-name>PasswordValidation</servlet-name>
-		<servlet-class>lyons.control.PasswordValidation</servlet-class>
-	</servlet>
-	<servlet>
-		<servlet-name>PutGoodsToCar</servlet-name>
-		<servlet-class>lyons.goods.PutGoodsToCar</servlet-class>
-	</servlet>
-	<servlet>
-		<servlet-name>DeleteGoodsFromCar</servlet-name>
-		<servlet-class>lyons.goods.DeleteGoodsFromCar</servlet-class>
-	</servlet>
-	<servlet>
-		<servlet-name>BuyGoods</servlet-name>
-		<servlet-class>lyons.goods.BuyGoods</servlet-class>
-	</servlet>
-	<servlet>
-		<servlet-name>Log4JTestServlet</servlet-name>
-		<servlet-class>lyons.control.Log4JTestServlet</servlet-class>
-	</servlet>
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+	id="WebApp_ID" version="3.0">
 
-
-	<!-- 分_______________割________________线 -->
-
-	<servlet-mapping>
-		<servlet-name>Log4JTestServlet</servlet-name>
-		<url-pattern>/test</url-pattern>
-	</servlet-mapping>
-	<!-- Spring 容器加载 -->
-	<listener>
-		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
-	</listener>
+		<!-- spring配置文件位置 -->
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
-		<param-value>classpath:applicationContext.xml</param-value>
+		<param-value>classpath:spring-mybatis.xml</param-value>
 	</context-param>
-	<!-- 设置根目录 -->
-	<context-param>
-		<param-name>webAppRootKey</param-name>
-		<param-value>webapp.root</param-value>
-	</context-param>
-	<context-param>
-		<param-name>log4jConfigLocation</param-name>
-		<param-value>/WEB-INF/classes/log4j.properties</param-value>
-	</context-param>
-	<!-- 3000表示 开一条watchdog线程每60秒扫描一下配置文件的变化;这样便于日志存放位置的改变 -->
-	<context-param>
-		<param-name>log4jRefreshInterval</param-name>
-		<param-value>3000</param-value>
-	</context-param>
+	
 	<listener>
-		<listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>
+		<description>spring监听器</description>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
-
-
+	<servlet>
+		<servlet-name>springmvc</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>classpath:springmvc.xml</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
 	<servlet-mapping>
-		<servlet-name>HandleRegister</servlet-name>
-		<url-pattern>/control.action</url-pattern>
+		<servlet-name>springmvc</servlet-name>
+		<url-pattern>/</url-pattern>
 	</servlet-mapping>
-	<servlet-mapping>
-		<servlet-name>HandleLogin</servlet-name>
-		<url-pattern>/lyons.control/HandleLogin</url-pattern>
-	</servlet-mapping>
-	<servlet-mapping>
-		<servlet-name>GoodsDao</servlet-name>
-		<url-pattern>/lyons.dao/GoodsDao</url-pattern>
-	</servlet-mapping>
-	<servlet-mapping>
-		<servlet-name>HandleExit</servlet-name>
-		<url-pattern>/lyons.control/HandleExit</url-pattern>
-	</servlet-mapping>
-	<servlet-mapping>
-		<servlet-name>PasswordUpdate</servlet-name>
-		<url-pattern>/control.PasswordUpdate</url-pattern>
-	</servlet-mapping>
-	<servlet-mapping>
-		<servlet-name>PasswordValidation</servlet-name>
-		<url-pattern>/control.PasswordValidation</url-pattern>
-	</servlet-mapping>
-	<servlet-mapping>
-		<servlet-name>PutGoodsToCar</servlet-name>
-		<url-pattern>/lyons.goods/PutGoodsToCar</url-pattern>
-	</servlet-mapping>
-	<servlet-mapping>
-		<servlet-name>DeleteGoodsFromCar</servlet-name>
-		<url-pattern>/lyons.goods/DeleteGoodsFromCar</url-pattern>
-	</servlet-mapping>
-	<servlet-mapping>
-		<servlet-name>BuyGoods</servlet-name>
-		<url-pattern>/lyons.goods/BuyGoods</url-pattern>
-	</servlet-mapping>
+	<display-name>ssm</display-name>
+	
+	<!-- 防止spring内存溢出监听器 -->
+	<listener>
+		<listener-class>org.springframework.web.util.IntrospectorCleanupListener</listener-class>
+	</listener>
+	
+	<filter>
+		<description>字符集过滤器</description>
+		<filter-name>encodingFilter</filter-name>
+		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+		<init-param>
+			<description>字符集编码</description>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>encodingFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	
 	<welcome-file-list>
+		<welcome-file>index.html</welcome-file>
+		<welcome-file>index.htm</welcome-file>
 		<welcome-file>index.jsp</welcome-file>
-		<welcome-file>/jsp/join/login.jsp</welcome-file>
+		<welcome-file>default.html</welcome-file>
+		<welcome-file>default.htm</welcome-file>
+		<welcome-file>default.jsp</welcome-file>
 	</welcome-file-list>
 </web-app>

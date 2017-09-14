@@ -48,8 +48,7 @@ public String testChat(@RequestParam("Ctext") String usermsg,Model model){
 public String testDatabase(Model model) {
 StringBuilder builder = new StringBuilder();
 List<Book> list = bookDAO.getAllBooks();
-    for (Book book :
-    list) {
+    for (Book book :list) {
     builder.append(book.toString()).append("\n");
     }
     if(StringUtils.isEmpty(builder.toString())){

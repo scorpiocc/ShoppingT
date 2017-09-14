@@ -14,7 +14,7 @@
 			<form action="<%= basePath %>Register.action" method="post">
 				<table border="1" cellpadding="10" cellspacing="1">
 					<tr>
-						<td>用户姓名:<input name="username" placeholder="*必填"/></td>
+						<td>用户姓名:<input name="username" placeholder="*-必填"/></td>
 						<td>用户密码：<input type="password" name="userpass" placeholder="*必填(6-16字符之间)"/></td>
 					</tr>
 					<tr>

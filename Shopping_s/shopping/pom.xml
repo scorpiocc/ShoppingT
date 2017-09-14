@@ -183,6 +183,25 @@
 			<artifactId>commons-lang3</artifactId>
 			<version>3.6</version>
 		</dependency>
+		
+		<dependency>
+ 			 <groupId>org.aspectj</groupId>
+  			<artifactId>aspectjrt</artifactId>
+  			<version>1.5.4</version>
+		</dependency>
+		
+		<dependency>
+ 			 <groupId>org.aspectj</groupId>
+  			<artifactId>aspectjweaver</artifactId>
+  			<version>1.5.4</version>
+		</dependency>
+		
+		<dependency>
+ 			 <groupId>aopalliance</groupId>
+  			<artifactId>aopalliance</artifactId>
+  			<version>1.0</version>
+		</dependency>
+		
 
 	</dependencies>
 
@@ -204,9 +223,9 @@
 				<version>9.3.14.v20161028</version>
 				<configuration>
 					<scanIntervalSeconds>2</scanIntervalSeconds>
-					<httpConnector>
+					<!-- <httpConnector>
 						<port>8085</port>
-					</httpConnector>
+					</httpConnector> -->
 					<webApp>
 						<contextPath>/sp</contextPath>
 					</webApp>
@@ -214,7 +233,7 @@
 			</plugin>
 
 			<!-- 指定maven编译版本 -->
-			<plugin>
+			<!-- <plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>${maven-compiler.version}</version>
@@ -224,9 +243,9 @@
 					<target>1.8</target>
 					<optimize>true</optimize>
 				</configuration>
-			</plugin>
+			</plugin>-->
 		</plugins>
-		<resources>
+		<!-- <resources>
 			<resource>
 				<directory>src/main/resources</directory>
 				<includes>
@@ -234,6 +253,6 @@
 				</includes>
 				<filtering>true</filtering>
 			</resource>
-		</resources>
+		</resources>  -->
 	</build>
 </project>
