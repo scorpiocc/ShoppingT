@@ -38,7 +38,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     					   HttpSession s= request.getSession(true);
                            s.invalidate();
                         %>
-	     					<a href="<%= path %>/login/index">登录</a>or<a href="<%= path %>/register/index">注册</a>
+	     					<a href="<%= path %>/login/login">登录</a>or<a href="<%= path %>/register/register">注册</a>
     					<%
     					return;
     					}
@@ -46,7 +46,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    						<dl>
    							<dt>
 	    						<a>欢迎您,<b><font color="red"><%= str %></font></b></a>
-	    						<a href="<%= path %>/lyons.control/HandleExit"><font color="#CDC9C9">退出</font></a>
+	    						<a href="<%= path %>/login/exit"><font color="#CDC9C9">退出</font></a>
 	    						<a href="jsp/join/updatePw.jsp"><font color="#CDC9C9">修改密码</font></a>
 	    						
    							</dt>

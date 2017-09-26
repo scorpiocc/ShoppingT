@@ -6,7 +6,7 @@
 	Login Logined = (Login)session.getAttribute("loginBean");
 	if(Logined==null)
 	{
-		response.sendRedirect("Adapter/jsp/join/login.jsp");
+		response.sendRedirect("join/login");
 	}
 %>
 

@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 
 /**
  * 用户注册实体类
- * @author Lyons(zhagnlei)
+ * @author 
  *
  */
 @Component

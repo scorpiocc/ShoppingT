@@ -1,6 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+  
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+  <%
+String path1 = request.getContextPath();
+    %>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -53,11 +57,11 @@
   <body>
    		<div>
   			<ul class="nav">
-    			<li><a class="on"  href="index.jsp?first=FP">首  页</a></li>
-    			<li><a href="lyons.dao/GoodsDao?key=3">我的订单</a></li>
-    			<li><a href="jsp/shoppingCar/lookShoppingCar.jsp"> 购物车</a></li>
-    			<li><a href="lyons.dao/GoodsDao?key=4">浏览商品</a></li>
-    			<li><a href="jsp/browse/searchByKeyWord.jsp">查询商品</a></li>
+    			<li><a class="on"  href="<%= path1 %>/login/index">首  页</a></li>
+    			<li><a href="<%= path1 %>/login/login">我的订单</a></li>
+    			<li><a href="<%= path1 %>/login/login"> 购物车</a></li>
+    			<li><a href="<%= path1 %>/login/login">浏览商品</a></li>
+    			<li><a href="<%= path1 %>/login/login">查询商品</a></li>
     		</ul>
    		</div>
   </body>

@@ -8,8 +8,10 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<c:forEach items="${students}" var="student">
+	<%-- <c:forEach items="${students}" var="student">
 		${student}<br>
-	</c:forEach>
+	</c:forEach> --%>
+	 ${vip} 
+	
 </body>
 </html>

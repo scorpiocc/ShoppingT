@@ -45,7 +45,8 @@
 
 	
 	<div align="center">
-		<form action="<%= path %>/register/index" method="post">
+	
+		<form action="<%= path %>/login/submit" method="post">
 		
 			<table border="0" cellpadding="15" cellspacing="1">
 				<tr>
@@ -65,6 +66,11 @@
 					
 					<td>
 						<input type="submit" value="登陆"/>
+					</td>
+				</tr>
+				<tr>
+					<td>
+					${backnews}
 					</td>
 				</tr>
 			</table>

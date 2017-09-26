@@ -25,12 +25,7 @@
     where USERNAME = #{username,jdbcType=VARCHAR}
   </delete>
   
-  <insert id="insert" parameterType="com.xc.ssm.entity.Register" >
-    insert into VIP (USERNAME, USERPASS, PHONE, 
-      ADDRESS, REALNAME)
-    values (#{username,jdbcType=VARCHAR}, #{userpass,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, 
-      #{address,jdbcType=VARCHAR}, #{realname,jdbcType=VARCHAR})
-  </insert>
+
   <insert id="insertSelective" parameterType="com.xc.ssm.entity.Register" >
     insert into VIP
     <trim prefix="(" suffix=")" suffixOverrides="," >

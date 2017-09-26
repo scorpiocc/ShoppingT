@@ -18,7 +18,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<meta http-equiv="expires" content="0">    
 	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 	<meta http-equiv="description" content="This is my page">
-	<meta http-equiv="refresh" content="1; url=<%= path %>/index.jsp"> 
+	<meta http-equiv="refresh" content="3; url=<%= path %>/index.jsp"> 
 	
 	<!-- <link rel="stylesheet" type="text/css" href="<%= path %>/css/nav.css">  -->
 
@@ -32,13 +32,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    		<%
 			if(loginBean.getBackNews()=="未登录"||loginBean.getBackNews()==null)
 			{%>
-			//需要修改代码
-				登录失败，请<a href="<%= path %>/jsp/join/login.jsp">重新登录</a>or<a href="<%= path %>/jsp/join/register.jsp">注册</a>
+			<!--  需要修改代码 -->
+				<%-- 登录失败，请<a href="<%= path %>/jsp/join/login.jsp">重新登录</a>or<a href="<%= path %>/jsp/join/register.jsp">注册</a> --%>
+				登陆失败 ~~ 3秒后跳转到首页
 			<%}else
 				{%>
 				<b><font color="red"><%=loginBean.getBackNews() %></font></b>
 				
-				1秒后跳转到首页.....
+				3秒后跳转到首页.....
 				<%}
     	%>  	
 
