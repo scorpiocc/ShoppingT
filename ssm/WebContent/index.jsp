@@ -47,7 +47,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    							<dt>
 	    						<a>欢迎您,<b><font color="red"><%= str %></font></b></a>
 	    						<a href="<%= path %>/login/exit"><font color="#CDC9C9">退出</font></a>
-	    						<a href="jsp/join/updatePw.jsp"><font color="#CDC9C9">修改密码</font></a>
+	    						<a href="<%= path %>/register/jumpupdate"><font color="#CDC9C9">修改密码</font></a>
 	    						
    							</dt>
    						</dl>

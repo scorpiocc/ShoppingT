@@ -11,7 +11,7 @@
       <jsp:useBean id="loginBean" class="lyons.entity.Login" scope="session"/>
       <% request.setCharacterEncoding("UTF-8"); %>
       
-     <center><br><br>
+     <br><br>
      
         <%   
              LinkedList<String> items = null;
@@ -24,7 +24,7 @@
                 return;
               }
         %>
-       <table border="1" bordercolor="#4EEE94" cellpadding="10" cellspacing="0" width="400" height="80">
+       <table border="1" bordercolor="#4EEE94" cellpadding="10" cellspacing="0" width="400" height="80" align="center">
          <caption>我的购物车</caption>
            <tr bgcolor=#458B74>
               <th>序号</th>
@@ -55,7 +55,7 @@
            %>
        </table>
       
-       <table cellpadding="10" cellspacing="0" width="400" height="80">
+       <table cellpadding="10" cellspacing="0" width="400" height="80" align="center">
            <tr>
               <td colspan=3>合计：<%= totalPrice %> RMB</td>
               <td>
@@ -66,7 +66,7 @@
               <td><%= backPage %></td>
            </tr>
        </table>
-      </center>
+      
  
 </body>
 </html>

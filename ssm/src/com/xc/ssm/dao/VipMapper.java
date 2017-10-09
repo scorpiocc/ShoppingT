@@ -7,6 +7,6 @@ import com.xc.ssm.entity.Vip;
 @Repository
 public interface VipMapper {
     Vip selectUser(@Param("username")String username,@Param("userpass")String userpass);  //验证帐号
-
+    
   
 }
