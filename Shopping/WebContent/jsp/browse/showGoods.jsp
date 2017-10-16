@@ -46,12 +46,12 @@
   			}
   			rowSet.last();
   			int totalRecord = rowSet.getRow();             //所查询的商品全部记录
-  			//out.println("所查询的商品全部记录"+totalRecord);
+  			out.println("所查询的商品全部记录"+totalRecord);
   			int PageSize = goods.getPageSize();            //每页显示的记录数
-  			//out.println("每页显示的记录数"+PageSize);
+  			out.println("每页显示的记录数"+PageSize);
   			int totalPages = goods.getTotalPage();         //总页数
   			int currentPage = goods.getCurrentPage();      //当前页码数
-  			//out.print("当前页码数"+currentPage);
+  			out.print("当前页码数"+currentPage);
   			
   			
   			//检查是否用户自定义了页数
@@ -64,6 +64,7 @@
   			if(request.getParameter("currentPage") != null)
   			{
   			   int newCurrentPageInt = Integer.parseInt(request.getParameter("currentPage"));
+  			   out.print("当前页数:"+newCurrentPageInt);
   			   if(newCurrentPageInt <= totalPages && newCurrentPageInt>0)//下一页必须小于总页数，大于0
   			   {
   			       currentPage = newCurrentPageInt;
@@ -115,7 +116,7 @@
   			       String commodity = null;
   			       commodity = ID+","+name+","+made+","+price+","+number+","+pic+","+category;//尾缀#，便于计算购物车价格
   			       commodity = commodity.replaceAll("\\p{Blank}","");     // 替换成""      空格或制表符：[ \t]
-  			       
+  			     out.print("commodity:"+commodity);
   			       String shopCarButton = "<form action='lyons.goods/PutGoodsToCar' method='post'>"+
   			                       "<input type='hidden' name='GoodsCar' value="+commodity+">"+
   			                       "<input type='submit' value='加入购物车'></form>";

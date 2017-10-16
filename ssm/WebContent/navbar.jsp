@@ -60,7 +60,7 @@ String path1 = request.getContextPath();
     			<li><a class="on"  href="<%= path1 %>/login/index">首  页</a></li>
     			<li><a href="<%= path1 %>/login/login">我的订单</a></li>
     			<li><a href="<%= path1 %>/login/login"> 购物车</a></li>
-    			<li><a href="<%= path1 %>/login/login">浏览商品</a></li>
+    			<li><a href="<%= path1 %>/shopping/handler/4">浏览商品</a></li>
     			<li><a href="<%= path1 %>/login/login">查询商品</a></li>
     		</ul>
    		</div>

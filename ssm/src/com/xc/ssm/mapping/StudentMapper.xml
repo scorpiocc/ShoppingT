@@ -6,17 +6,17 @@
     <result column="s_name" property="sName" jdbcType="VARCHAR" />
     <result column="s_age" property="sAge" jdbcType="INTEGER" />
   </resultMap>
-  <sql id="Base_Column_List" >
+  <sql id="student_id" >
     id, s_name, s_age
   </sql>
   <select id="selectStudents" resultMap="BaseResultMap">
   	select 
-  	<include refid="Base_Column_List" />
+  	<include refid="student_id" />
   	from student
   </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
-    <include refid="Base_Column_List" />
+    <include refid="student_id" />
     from student
     where id = #{id,jdbcType=INTEGER}
   </select>

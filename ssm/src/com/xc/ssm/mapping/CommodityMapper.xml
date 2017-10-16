@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xc.ssm.dao.CommodityMapper">
+  <resultMap id="BaseResultMap" type="com.xc.ssm.entity.Commodity">
+    <id column="COMMODITY_NUMBER" jdbcType="VARCHAR" property="commodityNumber" />
+    <result column="COMMODITY_NAME" jdbcType="VARCHAR" property="commodityName" />
+    <result column="COMMODITY_MADE" jdbcType="VARCHAR" property="commodityMade" />
+    <result column="COMMODITY_PRICE" jdbcType="DECIMAL" property="commodityPrice" />
+    <result column="COMMODITY_BALANCE" jdbcType="DECIMAL" property="commodityBalance" />
+    <result column="COMMODITY_PIC" jdbcType="VARCHAR" property="commodityPic" />
+    <result column="COMMODITY_ID" jdbcType="DECIMAL" property="commodityId" />
+  </resultMap>
+ 
+  <sql id="commodity_id">
+    COMMODITY_NUMBER, COMMODITY_NAME, COMMODITY_MADE, COMMODITY_PRICE, COMMODITY_BALANCE, 
+    COMMODITY_PIC, COMMODITY_ID
+  </sql>
+  
+  <select id="selectCommodity" resultMap="BaseResultMap">
+  	select 
+  	<include refid="commodity_id" />
+  	from COMMODITY
+  </select>
+  
+  
+  <!-- <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from COMMODITY
+    where COMMODITY_NUMBER = #{commodityNumber,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from COMMODITY
+    where COMMODITY_NUMBER = #{commodityNumber,jdbcType=VARCHAR}
+  </delete>
+ 
+  <insert id="insert" parameterType="com.xc.ssm.entity.Commodity">
+    insert into COMMODITY (COMMODITY_NUMBER, COMMODITY_NAME, COMMODITY_MADE, 
+      COMMODITY_PRICE, COMMODITY_BALANCE, COMMODITY_PIC, 
+      COMMODITY_ID)
+    values (#{commodityNumber,jdbcType=VARCHAR}, #{commodityName,jdbcType=VARCHAR}, #{commodityMade,jdbcType=VARCHAR}, 
+      #{commodityPrice,jdbcType=DECIMAL}, #{commodityBalance,jdbcType=DECIMAL}, #{commodityPic,jdbcType=VARCHAR}, 
+      #{commodityId,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.xc.ssm.entity.Commodity">
+    insert into COMMODITY
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="commodityNumber != null">
+        COMMODITY_NUMBER,
+      </if>
+      <if test="commodityName != null">
+        COMMODITY_NAME,
+      </if>
+      <if test="commodityMade != null">
+        COMMODITY_MADE,
+      </if>
+      <if test="commodityPrice != null">
+        COMMODITY_PRICE,
+      </if>
+      <if test="commodityBalance != null">
+        COMMODITY_BALANCE,
+      </if>
+      <if test="commodityPic != null">
+        COMMODITY_PIC,
+      </if>
+      <if test="commodityId != null">
+        COMMODITY_ID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="commodityNumber != null">
+        #{commodityNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="commodityName != null">
+        #{commodityName,jdbcType=VARCHAR},
+      </if>
+      <if test="commodityMade != null">
+        #{commodityMade,jdbcType=VARCHAR},
+      </if>
+      <if test="commodityPrice != null">
+        #{commodityPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="commodityBalance != null">
+        #{commodityBalance,jdbcType=DECIMAL},
+      </if>
+      <if test="commodityPic != null">
+        #{commodityPic,jdbcType=VARCHAR},
+      </if>
+      <if test="commodityId != null">
+        #{commodityId,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  
+  
+  <sql id="Base_Column_List">
+    COMMODITY_NUMBER, COMMODITY_NAME, COMMODITY_MADE, COMMODITY_PRICE, COMMODITY_BALANCE, 
+    COMMODITY_PIC, COMMODITY_ID
+  </sql>
+  <select id="selectByExample" parameterType="com.xc.ssm.entity.CommodityExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from COMMODITY
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from COMMODITY
+    where COMMODITY_NUMBER = #{commodityNumber,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from COMMODITY
+    where COMMODITY_NUMBER = #{commodityNumber,jdbcType=VARCHAR}
+  </delete>
+  
+  <insert id="insert" parameterType="com.xc.ssm.entity.Commodity">
+    insert into COMMODITY (COMMODITY_NUMBER, COMMODITY_NAME, COMMODITY_MADE, 
+      COMMODITY_PRICE, COMMODITY_BALANCE, COMMODITY_PIC, 
+      COMMODITY_ID)
+    values (#{commodityNumber,jdbcType=VARCHAR}, #{commodityName,jdbcType=VARCHAR}, #{commodityMade,jdbcType=VARCHAR}, 
+      #{commodityPrice,jdbcType=DECIMAL}, #{commodityBalance,jdbcType=DECIMAL}, #{commodityPic,jdbcType=VARCHAR}, 
+      #{commodityId,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.xc.ssm.entity.Commodity">
+    insert into COMMODITY
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="commodityNumber != null">
+        COMMODITY_NUMBER,
+      </if>
+      <if test="commodityName != null">
+        COMMODITY_NAME,
+      </if>
+      <if test="commodityMade != null">
+        COMMODITY_MADE,
+      </if>
+      <if test="commodityPrice != null">
+        COMMODITY_PRICE,
+      </if>
+      <if test="commodityBalance != null">
+        COMMODITY_BALANCE,
+      </if>
+      <if test="commodityPic != null">
+        COMMODITY_PIC,
+      </if>
+      <if test="commodityId != null">
+        COMMODITY_ID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="commodityNumber != null">
+        #{commodityNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="commodityName != null">
+        #{commodityName,jdbcType=VARCHAR},
+      </if>
+      <if test="commodityMade != null">
+        #{commodityMade,jdbcType=VARCHAR},
+      </if>
+      <if test="commodityPrice != null">
+        #{commodityPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="commodityBalance != null">
+        #{commodityBalance,jdbcType=DECIMAL},
+      </if>
+      <if test="commodityPic != null">
+        #{commodityPic,jdbcType=VARCHAR},
+      </if>
+      <if test="commodityId != null">
+        #{commodityId,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+
+  
+  <update id="updateByPrimaryKey" parameterType="com.xc.ssm.entity.Commodity">
+    update COMMODITY
+    set COMMODITY_NAME = #{commodityName,jdbcType=VARCHAR},
+      COMMODITY_MADE = #{commodityMade,jdbcType=VARCHAR},
+      COMMODITY_PRICE = #{commodityPrice,jdbcType=DECIMAL},
+      COMMODITY_BALANCE = #{commodityBalance,jdbcType=DECIMAL},
+      COMMODITY_PIC = #{commodityPic,jdbcType=VARCHAR},
+      COMMODITY_ID = #{commodityId,jdbcType=DECIMAL}
+    where COMMODITY_NUMBER = #{commodityNumber,jdbcType=VARCHAR}
+  </update> -->
+</mapper>

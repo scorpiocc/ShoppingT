@@ -26,8 +26,23 @@ public class Vip implements Serializable{
     private String address;
 
     private String realname;
+    
 
-    public String getUsername() {
+    public Vip() {
+		super();
+	}
+
+	public Vip(String username, String userpass, String phone, String address,
+			String realname) {
+		super();
+		this.username = username;
+		this.userpass = userpass;
+		this.phone = phone;
+		this.address = address;
+		this.realname = realname;
+	}
+
+	public String getUsername() {
         return username;
     }
 

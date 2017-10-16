@@ -1,6 +1,9 @@
 package com.xc.ssm.service.impl;
 
+
 import javax.annotation.Resource;
+
+
 
 
 
@@ -15,7 +18,7 @@ import com.xc.ssm.utils.PasswordMd5;
 @Service
 public class LoginUserServiceImpl implements LoginUserService {
 	private VipMapper vipmapper;
-	
+
 	@Resource
 	public void setVipmapper(VipMapper vipmapper) {
 		this.vipmapper = vipmapper;
@@ -31,6 +34,8 @@ public class LoginUserServiceImpl implements LoginUserService {
 		
 		return vipmapper.selectUser(username, userpass);	
 	}
+
+	
 
 	
 

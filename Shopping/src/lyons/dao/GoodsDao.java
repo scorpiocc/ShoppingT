@@ -237,6 +237,7 @@ public class GoodsDao extends HttpServlet
 							rowSet.populate(rs);
 							goods.setRowSet(rowSet);
 							System.out.println("4浏览商品已经从数据库中获取到值，并塞进行集");
+							System.out.println("------");
 							request.getRequestDispatcher("/jsp/browse/showGoods.jsp").forward(request, response);
 						}else
                         {
