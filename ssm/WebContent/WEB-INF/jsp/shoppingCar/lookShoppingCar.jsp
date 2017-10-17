@@ -2,6 +2,9 @@
     pageEncoding="UTF-8"%>
 <%@page import="java.util.LinkedList"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%
+String path = request.getContextPath();
+%>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
@@ -19,7 +22,7 @@
               if(items.size()==0)
               {%>
                     <font color=green> 购物车空空的，抓紧去 </font> 
-                    <a href="/Adapter/lyons.dao/GoodsDao?key=4"><font color=red size=6>购物</font></a> 
+                    <a href="<%=path %>/shopping/handler/4"><font color=red size=6>购物</font></a> 
               <%
                 return;
               }
@@ -36,7 +39,6 @@
           </tr>
           
           <%
-        //String[] items = car.split("#");//将各条商品分割到数组中
         double totalPrice = 0.00;
               for(int j=0,m=items.size();j<m;++j)
               {
@@ -49,9 +51,9 @@
 	                       <td><%= item[i]%></td>
 	                <%}
                  totalPrice += Double.parseDouble(item[3]); 
-            %> <td><a href='/Adapter/lyons.goods/DeleteGoodsFromCar?ID=<%= j %>' >删除</a></td></tr><%
+            %> <td><a href='<%=path %>/shopping/DeleteGoodsFromCar/<%= j %>' >删除</a></td></tr><%
               }
-              String backPage = "<a href='/Adapter/jsp/browse/showGoods.jsp'><font color=green><b>继续购物</b></font></a>";
+              String backPage = "<a href='/ssm//shopping/handler/4'><font color=green><b>继续购物</b></font></a>";
            %>
        </table>
       

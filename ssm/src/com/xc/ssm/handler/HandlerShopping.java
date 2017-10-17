@@ -1,7 +1,5 @@
 package com.xc.ssm.handler;
 
-import java.io.IOException;
-import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.util.LinkedList;
 import java.util.List;
@@ -26,6 +24,12 @@ import com.xc.ssm.service.ShoppingService;
 public class HandlerShopping {
 	@Resource
 	private ShoppingService shoppingservice;
+	
+	//查看购物车
+	@RequestMapping("/ShopCar")
+	public String Shopping_ShopCar(){
+		return "shoppingCar/lookShoppingCar";
+	}
 	
 	//浏览商品界面
 	 @RequestMapping("/handler/{Key}")
@@ -159,14 +163,35 @@ public class HandlerShopping {
             car.add(goods);
             loginBean.setCar(car);
             System.out.println("信息写入成功");
+
             model.addAttribute("goodsName", details[1]);
-            
             return "browse/PutToCarReturn";
         }
 		
 	 }
-	 
-	 
+	 //删除购物车商品
+	 @RequestMapping("/DeleteGoodsFromCar/{Did}")
+	 public String Shopping_DeleteGoods(HttpServletRequest request, HttpServletResponse response,@PathVariable String Did,Model model){
+		 	response.setContentType("text/html;setchar=UTF-8");
+	        try {
+				request.setCharacterEncoding("UTF-8");
+			} catch (UnsupportedEncodingException e) {
+				System.out.println("编码问题"+e);
+				e.printStackTrace();
+			}
+	        int deleteID = -1;
+	        deleteID =  Integer.parseInt(Did);
+	        System.out.println("删除数组下标为："+deleteID);
+	        
+	        HttpSession session = request.getSession(true);
+	        Login loginBean = (Login)session.getAttribute("loginBean");
+	        LinkedList<String> car = null;
+	        car = loginBean.getCar();
+	        car.remove(deleteID);
+	        loginBean.setCar(car);
+		 
+		 return "shoppingCar/lookShoppingCar";
+	 }
 
 }
 

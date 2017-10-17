@@ -24,11 +24,11 @@
   		
   	<br><br><br>
   	<center>
-  	<font size=5 color=red><B>${goodsName}s</B></font>&nbsp;已成功添加购物车
+  	<font size=5 color=red><B>${goodsName}</B></font>&nbsp;已成功添加购物车
   	<br><br><br>
   	<a href="<%=path %>/shopping/handler/4">返回继续购物</a>
   	&nbsp;&nbsp;
-  	<a href=/ssm/jsp/shoppingCar/lookShoppingCar.jsp>查看购物车</a>
+  	<a href="<%=path %>/shopping/ShopCar">查看购物车</a>
   	</center>
    
   </body>

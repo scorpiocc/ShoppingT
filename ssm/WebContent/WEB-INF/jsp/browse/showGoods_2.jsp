@@ -121,12 +121,12 @@
   			               <td>${comm.commodityName}</td>
   			               <td>${comm.commodityPrice}￥</td>
   			               <td> <%=totals %><%=path %><%= detail1 %>
-  			               		${comm.commodityNumber},${comm.commodityMade},${comm.commodityPrice},${comm.commodityBalance},${comm.commodityNumber},${comm.commodityPic},${comm.commodityId}
+  			               		${comm.commodityNumber},${comm.commodityName},${comm.commodityMade},${comm.commodityPrice},${comm.commodityBalance},${comm.commodityPic},${comm.commodityId}
   			               	   <%= detail2 %>
   			               </td>
   			               <td>
   			               	    <%=totals %><%=path %><%= shopCarButton1 %>
-  			               		${comm.commodityNumber},${comm.commodityMade},${comm.commodityPrice},${comm.commodityBalance},${comm.commodityNumber},${comm.commodityPic},${comm.commodityId}
+  			               		${comm.commodityNumber},${comm.commodityName},${comm.commodityMade},${comm.commodityPrice},${comm.commodityBalance},${comm.commodityPic},${comm.commodityId}
   			               	   <%= shopCarButton2 %>
   			               </td>
   			           </tr>
