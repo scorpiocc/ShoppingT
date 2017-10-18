@@ -39,7 +39,6 @@
   		        <th>查看详情</th>
   		        <th>添加到购物车</th>
   		    </tr>
-  		   
   		     
   		<%
   		
@@ -97,10 +96,7 @@
   		 <%-- 数据：<%=(currentPage-1)*PageSize %> ---    当前显示条数：<%=PageSize %> ---   当前页数：<%=currentPage %>  --%>
   		 <c:forEach items="${com}" var="comm" varStatus="st" begin="<%=(currentPage-1)*PageSize %>" end="<%=((PageSize-1)+(currentPage-1)*PageSize) %>">
   			
-  			 <% /* String commodity = null;
-		     //commodity = ID+","+name+","+made+","+price+","+number+","+pic+","+category;
-		     commodity = commodity.replaceAll("\\p{Blank}","");     // 替换成""      空格或制表符：[ \t] */
-			
+  			 <%
 		     //1,沃特篮球鞋,佛山,180,497,001.jpg,1
 		     
 		     

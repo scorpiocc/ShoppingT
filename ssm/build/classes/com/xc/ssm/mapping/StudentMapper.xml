@@ -18,7 +18,7 @@
     select 
     <include refid="student_id" />
     from student
-    where id = #{id,jdbcType=INTEGER}
+    where s_age = #{age,jdbcType=INTEGER}  
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from student

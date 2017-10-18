@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.xc.ssm.entity.Commodity;
 import com.xc.ssm.entity.Goods;
 import com.xc.ssm.entity.Login;
+import com.xc.ssm.entity.OrderForm;
+import com.xc.ssm.service.OrderFormService;
 import com.xc.ssm.service.ShoppingService;
 
 @Controller
@@ -24,6 +26,8 @@ import com.xc.ssm.service.ShoppingService;
 public class HandlerShopping {
 	@Resource
 	private ShoppingService shoppingservice;
+	@Resource
+	private OrderFormService orderformservice;
 	
 	//查看购物车
 	@RequestMapping("/ShopCar")
@@ -46,7 +50,7 @@ public class HandlerShopping {
 		System.out.println("keyword:"+keyWord);
 		String test = "";
 		test = request.getParameter("newPageSize");
-		System.out.println("test:"+test);
+		System.out.println("新页数:"+test);
 		
 		response.setContentType("text/html;charset=UTF-8");
         
@@ -86,14 +90,36 @@ public class HandlerShopping {
 			break;
 		case 3:
 			
-			break;
+			List<String> orderform = orderformservice.selectByUserName(user);
+			model.addAttribute("OrderForm", orderform);
+			System.out.println("查找添加成功！");
+			//修改显示条数
+			double  FormPageSize = orderform.size(); //获取数据总长度
+			System.out.println("获取到"+FormPageSize+"条结果");
+			int FormcurrentPage ; 
+			if(request.getParameter("newPageSize")!=null){
+				FormcurrentPage =  Integer.parseInt(request.getParameter("newPageSize"));
+				 System.out.println("当前订单显示条数"+FormcurrentPage);
+			}else{
+				FormcurrentPage = goods.getPageSize();
+				 System.out.println("显示订单默认条数"+FormcurrentPage);
+			}
+			int  Formtotalpages  =  (int) Math.ceil(FormPageSize/FormcurrentPage);
+			System.out.println("总共"+Formtotalpages+"页");
+			model.addAttribute("FormTotalPages",Formtotalpages);
+			 
+			
+			return "order/lookOrderForm";
+			
+			
+			
 		case 4:
 			 //查找数据
 			List<Commodity> com = shoppingservice.selectCommodity();
 			model.addAttribute("com", com );
 			System.out.println("查找添加成功！");
 			//修改显示条数
-			int  PageSize = com.size(); //获取数据总长度
+			double  PageSize = com.size(); //获取数据总长度
 			int currentPage ; 
 			if(request.getParameter("newPageSize")!=null){
 				   currentPage =  Integer.parseInt(request.getParameter("newPageSize"));
@@ -191,6 +217,19 @@ public class HandlerShopping {
 	        loginBean.setCar(car);
 		 
 		 return "shoppingCar/lookShoppingCar";
+	 }
+	 @RequestMapping("/ByGoods")
+	 public String Shopping_ByGoods(HttpServletRequest request, HttpServletResponse response,@PathVariable String Did,Model model){
+		 	response.setContentType("text/html;setchar=UTF-8");
+	        try {
+				request.setCharacterEncoding("UTF-8");
+			} catch (UnsupportedEncodingException e) {
+				System.out.println("编码问题"+e);
+				e.printStackTrace();
+			}
+	        
+	        
+	        return "";
 	 }
 
 }

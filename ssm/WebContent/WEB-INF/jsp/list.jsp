@@ -8,10 +8,13 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<c:forEach items="${students}" var="student">
-		${student.sAge}<br>
+
+	<c:forEach items="${OrderForm}" var="s">
+		${s.commodityName}<Br>
+		${s.sum}<Br>
+		
 	</c:forEach> 
 	 
-	
+	${FormTotalPages} 
 </body>
 </html>

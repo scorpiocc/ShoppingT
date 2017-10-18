@@ -21,8 +21,8 @@ public class StudentHandler {
 	@RequestMapping("/list")
 	public String getAllStudents(Model model,HttpServletRequest request, HttpServletResponse response){
 		model.addAttribute("students", studentService.queryAllStudent());
-		String aaa = request.getParameter("detail");
-		System.out.println("--"+aaa.trim()+"--");
+		
+		
 		return "list";
 	}
 }

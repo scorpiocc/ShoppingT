@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xc.ssm.dao.OrderFormMapper">
+  <resultMap id="BaseResultMap" type="com.xc.ssm.entity.OrderForm">
+    <id column="ID" jdbcType="DECIMAL" property="id" />
+    <result column="USERNAME" jdbcType="VARCHAR" property="username" />
+    <result column="ORDERDATE" jdbcType="TIMESTAMP" property="orderdate" />
+    <result column="COMMODITY_NAME" jdbcType="VARCHAR" property="commodityName" />
+    <result column="COMMODITY_PRICE" jdbcType="DECIMAL" property="commodityPrice" />
+    <result column="SUM" jdbcType="DECIMAL" property="sum" />
+  </resultMap>
+  
+  <resultMap id="OrderFormR" type="com.xc.ssm.entity.OrderForm">
+    <result column="COMMODITY_NAME" jdbcType="VARCHAR" property="commodityName" />
+    <result column="SUM" jdbcType="DECIMAL" property="sum" />
+  </resultMap>
+  
+  <sql id="OrderForm_sql">
+    ID, USERNAME, ORDERDATE, COMMODITY_NAME, COMMODITY_PRICE, SUM
+  </sql>
+  <!-- 根据用户名查找对应订单 -->
+  <select id="selectByUserName" parameterType="java.lang.String" resultMap="OrderFormR">
+    select 
+    COMMODITY_NAME,sum(SUM) SUM
+    from ORDERFORM
+    where USERNAME = #{username,jdbcType=VARCHAR}
+    group by COMMODITY_NAME 
+    having sum(SUM)>0
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from ORDERFORM
+    where ID = #{id,jdbcType=DECIMAL}
+  </delete>
+  
+  <insert id="insert" parameterType="com.xc.ssm.entity.OrderForm">
+    insert into ORDERFORM (ID, USERNAME, ORDERDATE, 
+      COMMODITY_NAME, COMMODITY_PRICE, SUM
+      )
+    values (#{id,jdbcType=DECIMAL}, #{username,jdbcType=VARCHAR}, #{orderdate,jdbcType=TIMESTAMP}, 
+      #{commodityName,jdbcType=VARCHAR}, #{commodityPrice,jdbcType=DECIMAL}, #{sum,jdbcType=DECIMAL}
+      )
+  </insert>
+  
+  <insert id="insertOrderForm" parameterType="com.xc.ssm.entity.OrderForm">
+    insert into ORDERFORM
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="username != null">
+        USERNAME,
+      </if>
+      <if test="orderdate != null">
+        ORDERDATE,
+      </if>
+      <if test="commodityName != null">
+        COMMODITY_NAME,
+      </if>
+      <if test="commodityPrice != null">
+        COMMODITY_PRICE,
+      </if>
+      <if test="sum != null">
+        SUM,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=DECIMAL},
+      </if>
+      <if test="username != null">
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="orderdate != null">
+        #{orderdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="commodityName != null">
+        #{commodityName,jdbcType=VARCHAR},
+      </if>
+      <if test="commodityPrice != null">
+        #{commodityPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="sum != null">
+        #{sum,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  
+  
+ <!--  <update id="updateByPrimaryKey" parameterType="com.xc.ssm.entity.OrderForm">
+    update ORDERFORM
+    set USERNAME = #{username,jdbcType=VARCHAR},
+      ORDERDATE = #{orderdate,jdbcType=TIMESTAMP},
+      COMMODITY_NAME = #{commodityName,jdbcType=VARCHAR},
+      COMMODITY_PRICE = #{commodityPrice,jdbcType=DECIMAL},
+      SUM = #{sum,jdbcType=DECIMAL}
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  <resultMap id="BaseResultMap" type="com.xc.ssm.entity.OrderForm">
+    <id column="ID" jdbcType="DECIMAL" property="id" />
+    <result column="USERNAME" jdbcType="VARCHAR" property="username" />
+    <result column="ORDERDATE" jdbcType="TIMESTAMP" property="orderdate" />
+    <result column="COMMODITY_NAME" jdbcType="VARCHAR" property="commodityName" />
+    <result column="COMMODITY_PRICE" jdbcType="DECIMAL" property="commodityPrice" />
+    <result column="SUM" jdbcType="DECIMAL" property="sum" />
+  </resultMap>
+ 
+  
+  <sql id="OrderForm_sql">
+    ID, USERNAME, ORDERDATE, COMMODITY_NAME, COMMODITY_PRICE, SUM
+  </sql>
+  
+  <select id="selectByUserName" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="OrderForm_sql" />
+    from ORDERFORM
+    where ID = #{id,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from ORDERFORM
+    where ID = #{id,jdbcType=DECIMAL}
+  </delete>
+  
+  <insert id="insert" parameterType="com.xc.ssm.entity.OrderForm">
+    insert into ORDERFORM (ID, USERNAME, ORDERDATE, 
+      COMMODITY_NAME, COMMODITY_PRICE, SUM
+      )
+    values (#{id,jdbcType=DECIMAL}, #{username,jdbcType=VARCHAR}, #{orderdate,jdbcType=TIMESTAMP}, 
+      #{commodityName,jdbcType=VARCHAR}, #{commodityPrice,jdbcType=DECIMAL}, #{sum,jdbcType=DECIMAL}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.xc.ssm.entity.OrderForm">
+    insert into ORDERFORM
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="username != null">
+        USERNAME,
+      </if>
+      <if test="orderdate != null">
+        ORDERDATE,
+      </if>
+      <if test="commodityName != null">
+        COMMODITY_NAME,
+      </if>
+      <if test="commodityPrice != null">
+        COMMODITY_PRICE,
+      </if>
+      <if test="sum != null">
+        SUM,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=DECIMAL},
+      </if>
+      <if test="username != null">
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="orderdate != null">
+        #{orderdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="commodityName != null">
+        #{commodityName,jdbcType=VARCHAR},
+      </if>
+      <if test="commodityPrice != null">
+        #{commodityPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="sum != null">
+        #{sum,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert> -->
+  
+
+</mapper>

@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+ <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+ <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ include file="/WEB-INF/jsp/join/isLogin.jsp" %>
 <%@ include file="/index.jsp" %>
 <%@page import="com.sun.rowset.CachedRowSetImpl"%>
@@ -29,12 +31,14 @@
             if(rowSet==null)
             {
                 out.print("商品数据库中没有哦");
-                return;
+                
             }
-            rowSet.last();
-            int totalRecord = rowSet.getRow();             //所查询的商品全部记录
-            int PageSize = goods.getPageSize();            //每页显示的记录数
-            int totalPages = goods.getTotalPage();         //总页数
+            
+            int PageSize = goods.getFormpageSize();            //每页显示的记录数
+            int totalPages = 1;
+			if(request.getParameter("FormTotalPages") != null){
+			  totalPages =Integer.parseInt(request.getParameter("FormTotalPages"));  //总页数
+			}
             int currentPage = goods.getCurrentPage();      //当前页码数
             
             
@@ -57,53 +61,18 @@
                    }
             }
             
-            //分页
-            if(totalRecord % PageSize == 0)
-            {
-               totalPages = totalRecord/PageSize;
-            }else
-                 {
-                   totalPages = totalRecord/PageSize+1;
-                 }
-            goods.setCurrentPage(currentPage);
-            goods.setPageSize(PageSize);
-            goods.setTotalPage(totalPages);
-            
-            if(totalPages >= 1)
-            {
-               if(goods.getCurrentPage()<1)
-               {
-                   goods.setCurrentPage(goods.getTotalPage());//点击上一页提交时CurrentPage+1，但当前页面已经是最后一页，会出现此表达式会成立
-               }
-               
-               if(goods.getCurrentPage()>goods.getTotalPage()) //点击下一页提交时CurrentPage+1，但当前页面已经是最后一页，会出现此表达式会成立
-               {
-                   goods.setCurrentPage(1);
-               }
-               
-               int index = ((goods.getCurrentPage()-1)*PageSize)+1;
-               rowSet.absolute(index);//查询位置移动到currentPage页起始位置
-               
-               boolean flag = true;
-               for(int i=1,j=goods.getPageSize();i<=j&&flag;i++)
-               {
-                   String commodity_name = rowSet.getString(1);
-                   String orderNumber = rowSet.getString(2);
-                   
-                   %>
-                       <tr <% if(i%2 == 0){%> bgcolor="#20B2AA" <%}else{%> bgcolor="#008B8B" <%};//隔行换颜色%>>
-                           <td><%= i %></td>
-                           <td><%= commodity_name %></td>
-                           <td><%= orderNumber %></td>
-                       </tr>
-                   <%
-                  flag = rowSet.next(); //查看是否还有值   
-               }
-            }
         %> 
+        <c:forEach items="${OrderForm}" var="order" varStatus="st" begin="<%=(currentPage-1)*PageSize %>" end="<%=((PageSize-1)+(currentPage-1)*PageSize) %>">
+  			<c:if test="${st.count%2==0}"><tr bgcolor="#FFE4B5"></c:if>
+  			 <c:if test="${st.count%2==1}"><tr bgcolor="#FFFACD"></c:if>	
+  			 
+  			     <td>${st.count}</td>
+  			     <td>${order.commodityName}</td>
+  			     <td>${order.sum}</td>
+        </c:forEach>
     </table>
     
-    <br><%= goods.getCurrentPage() %>/<%= goods.getTotalPage() %> 页
+    <br><%=currentPage %>/${FormTotalPages}页 
     
     <table>
      <tr>
@@ -124,7 +93,7 @@
      <tr>
          <td><BR>
              <form action="" method="post">
-                总计：<%= totalRecord %>条记录.每页显示<input type="text" name="newPageSize" value="<%= PageSize %>" size="2">条.
+                总计：${fn:length(OrderForm)}条记录.每页显示<input type="text" name="newPageSize" value="<%= PageSize %>" size="2">条.
                      <input type="submit" value="确定">
              </form>
          </td>
