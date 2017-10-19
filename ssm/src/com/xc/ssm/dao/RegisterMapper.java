@@ -8,7 +8,7 @@ public interface RegisterMapper {
 	int insertSelective(Register register);
 	//修改用户信息
 	int updateByPrimaryKeySelective(Vip vip);
-	
+	//根据名字查找用户
 	Vip selectByUser(String username);
 	
 }

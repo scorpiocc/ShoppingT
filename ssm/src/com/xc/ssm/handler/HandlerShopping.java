@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.xc.ssm.entity.Commodity;
 import com.xc.ssm.entity.Goods;
 import com.xc.ssm.entity.Login;
-import com.xc.ssm.entity.OrderForm;
 import com.xc.ssm.service.OrderFormService;
 import com.xc.ssm.service.ShoppingService;
 
@@ -83,16 +82,43 @@ public class HandlerShopping {
             model.addAttribute("backnews", backnews);
              return "join/login";
           }
+        
+          double  PageSize; //数据总长度
+          int currentPage;  //显示条数
+          int  totalPages ; //总页数
           
           switch (key) {
 		case 2:
+			//根据Key浏览商品
+			String keyword = request.getParameter("keyWord");
+			System.out.println("查找条件为:"+keyword);
+			List<Commodity> keysearch = shoppingservice.selectCommodityByKey(keyword);
+			if(keysearch == null){
+				model.addAttribute("searchinfo","亲,还没有此类商品噢,请更换关键字查询");
+				return "browse/searchByKeyWord";
+			}
+			model.addAttribute("com", keysearch);
+			System.out.println("根据Key浏览商品--查找添加成功！");
+			//修改显示条数
+			PageSize = keysearch.size(); //获取数据总长度
+			if(request.getParameter("newPageSize")!=null){
+				   currentPage =  Integer.parseInt(request.getParameter("newPageSize"));
+				 System.out.println("当前显示条数"+currentPage);
+			}else{
+				  currentPage = goods.getPageSize();
+				 System.out.println("显示默认条数"+currentPage);
+			}
+			totalPages  =  (int) Math.ceil(PageSize/currentPage);
+			model.addAttribute("totalPages",totalPages);
+			 
 			
-			break;
+			return "browse/showGoods_2";
+			
 		case 3:
-			
+			//查看订单
 			List<String> orderform = orderformservice.selectByUserName(user);
 			model.addAttribute("OrderForm", orderform);
-			System.out.println("查找添加成功！");
+			System.out.println("查看订单--查找添加成功！");
 			//修改显示条数
 			double  FormPageSize = orderform.size(); //获取数据总长度
 			System.out.println("获取到"+FormPageSize+"条结果");
@@ -114,13 +140,12 @@ public class HandlerShopping {
 			
 			
 		case 4:
-			 //查找数据
+			 //浏览商品
 			List<Commodity> com = shoppingservice.selectCommodity();
 			model.addAttribute("com", com );
-			System.out.println("查找添加成功！");
+			System.out.println("浏览商品--查找添加成功！");
 			//修改显示条数
-			double  PageSize = com.size(); //获取数据总长度
-			int currentPage ; 
+			 PageSize = com.size(); //获取数据总长度 
 			if(request.getParameter("newPageSize")!=null){
 				   currentPage =  Integer.parseInt(request.getParameter("newPageSize"));
 				 System.out.println("当前显示条数"+currentPage);
@@ -128,7 +153,7 @@ public class HandlerShopping {
 				  currentPage = goods.getPageSize();
 				 System.out.println("显示默认条数"+currentPage);
 			}
-			int  totalPages  =  (int) Math.ceil(PageSize/currentPage);
+		    totalPages  =  (int) Math.ceil(PageSize/currentPage);
 			model.addAttribute("totalPages",totalPages);
 			 
 			

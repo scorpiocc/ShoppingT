@@ -14,12 +14,19 @@
   <sql id="commodity_id">
     COMMODITY_NUMBER, COMMODITY_NAME, COMMODITY_MADE, COMMODITY_PRICE, COMMODITY_BALANCE, 
     COMMODITY_PIC, COMMODITY_ID
-  </sql>
+  </sql> 
   
   <select id="selectCommodity" resultMap="BaseResultMap">
   	select 
   	<include refid="commodity_id" />
   	from COMMODITY
+  </select>
+  
+  <select id="selectCommodityByKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="commodity_id" />
+    from COMMODITY
+    where COMMODITY_NAME like '%'|| #{commodityNumber,jdbcType=VARCHAR} ||'%'
   </select>
   
   
