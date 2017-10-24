@@ -29,6 +29,17 @@
     where COMMODITY_NAME like '%'|| #{commodityNumber,jdbcType=VARCHAR} ||'%'
   </select>
   
+  <!-- 更新商品库存 -->
+  <update id="updateStock" parameterType="com.xc.ssm.entity.Commodity">
+  update
+  COMMODITY
+  set
+  COMMODITY_BALANCE = #{commodityBalance,jdbcType=DECIMAL}
+  where
+  COMMODITY_NUMBER = #{commodityNumber,jdbcType=VARCHAR}
+  </update>
+  
+  
   
   <!-- <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 

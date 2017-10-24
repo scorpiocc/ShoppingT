@@ -27,7 +27,7 @@ String path = request.getContextPath();
                 return;
               }
         %>
-       <table border="1" bordercolor="#4EEE94" cellpadding="10" cellspacing="0" width="400" height="80">
+       <table border="1" bordercolor="#4EEE94" cellpadding="10" cellspacing="0" width="450" height="80">
          <caption>我的购物车</caption>
            <tr bgcolor=#458B74>
               <th>序号</th>
@@ -53,7 +53,6 @@ String path = request.getContextPath();
                  totalPrice += Double.parseDouble(item[3]); 
             %> <td><a href='<%=path %>/shopping/DeleteGoodsFromCar/<%= j %>' >删除</a></td></tr><%
               }
-              String backPage = "<a href='/ssm//shopping/handler/4'><font color=green><b>继续购物</b></font></a>";
            %>
        </table>
       
@@ -61,11 +60,12 @@ String path = request.getContextPath();
            <tr>
               <td colspan=3>合计：<%= totalPrice %> RMB</td>
               <td>
-                    <form action="/Adapter/lyons.goods/BuyGoods" method="post">
+                   <form action="<%=path %>/shopping/ByGoods" method="post">
                         <input type="submit" value="确认付款"/>
-                    </form>
+                    </form> 
+                 
               </td>
-              <td><%= backPage %></td>
+              <td><a href='<%=path %>/shopping/handler/4' ><font color=green><b>继续购物</b></font></a></td>
            </tr>
        </table>
       </center>

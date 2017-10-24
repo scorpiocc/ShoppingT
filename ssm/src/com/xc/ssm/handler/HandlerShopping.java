@@ -1,6 +1,7 @@
 package com.xc.ssm.handler;
 
 import java.io.UnsupportedEncodingException;
+import java.math.BigDecimal;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -8,6 +9,12 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+
+
+
+
+
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.xc.ssm.entity.Commodity;
 import com.xc.ssm.entity.Goods;
 import com.xc.ssm.entity.Login;
+import com.xc.ssm.entity.OrderForm;
 import com.xc.ssm.service.OrderFormService;
 import com.xc.ssm.service.ShoppingService;
 
@@ -27,6 +35,7 @@ public class HandlerShopping {
 	private ShoppingService shoppingservice;
 	@Resource
 	private OrderFormService orderformservice;
+	
 	
 	//查看购物车
 	@RequestMapping("/ShopCar")
@@ -86,6 +95,9 @@ public class HandlerShopping {
           double  PageSize; //数据总长度
           int currentPage;  //显示条数
           int  totalPages ; //总页数
+          double  FormPageSize; //订单数据总长度
+          int FormcurrentPage ; //订单显示条数
+          
           
           switch (key) {
 		case 2:
@@ -120,9 +132,8 @@ public class HandlerShopping {
 			model.addAttribute("OrderForm", orderform);
 			System.out.println("查看订单--查找添加成功！");
 			//修改显示条数
-			double  FormPageSize = orderform.size(); //获取数据总长度
+			FormPageSize = orderform.size(); //获取数据总长度
 			System.out.println("获取到"+FormPageSize+"条结果");
-			int FormcurrentPage ; 
 			if(request.getParameter("newPageSize")!=null){
 				FormcurrentPage =  Integer.parseInt(request.getParameter("newPageSize"));
 				 System.out.println("当前订单显示条数"+FormcurrentPage);
@@ -230,6 +241,7 @@ public class HandlerShopping {
 				System.out.println("编码问题"+e);
 				e.printStackTrace();
 			}
+	        System.out.println("开始删除购物车商品！");
 	        int deleteID = -1;
 	        deleteID =  Integer.parseInt(Did);
 	        System.out.println("删除数组下标为："+deleteID);
@@ -240,11 +252,11 @@ public class HandlerShopping {
 	        car = loginBean.getCar();
 	        car.remove(deleteID);
 	        loginBean.setCar(car);
-		 
+	        System.out.println("删除成功！");
 		 return "shoppingCar/lookShoppingCar";
 	 }
 	 @RequestMapping("/ByGoods")
-	 public String Shopping_ByGoods(HttpServletRequest request, HttpServletResponse response,@PathVariable String Did,Model model){
+	 public String Shopping_ByGoods(HttpServletRequest request, HttpServletResponse response,Model model){
 		 	response.setContentType("text/html;setchar=UTF-8");
 	        try {
 				request.setCharacterEncoding("UTF-8");
@@ -252,10 +264,95 @@ public class HandlerShopping {
 				System.out.println("编码问题"+e);
 				e.printStackTrace();
 			}
+	        System.out.println("开始结算！");
+	        //从模型中直接拿取购物车信息
+	        HttpSession session = request.getSession(true);
+	        Login loginBean = (Login)session.getAttribute("loginBean");
+	        String userName = "myNull";
+	        userName = loginBean.getUsername();
+	        LinkedList<String> car = null;
+	        car = loginBean.getCar();
 	        
+	        if (car.size()!=0)
+	        {
+	            boolean falg = false;
 	        
-	        return "";
+	        for (int i = 0,m=car.size(); i < m; i++)
+            {
+                    String[] goods = null;
+                    goods = car.get(i).split(",");
+                    OrderForm order = new OrderForm();//创建订单对象
+                    order.setUsername(userName); //添加订单用户名
+                    order.setSum(1L);            //默认先为1
+                    Commodity commodity = new  Commodity(); //创建商品对象
+                    for (int j = 0,n=goods.length; j < n; j++)
+                    {
+                        switch (j)
+                        {
+                            case 0:
+                                    String commodity_number = null;
+                                    commodity_number = goods[0];
+                                    commodity.setCommodityNumber(commodity_number); //商品编号ID
+                                break;
+                            case 1:
+                                    String commodity_name= null;
+                                    commodity_name = goods[1];
+                                    order.setCommodityName(commodity_name); //订单商品名称
+                                break;
+                            case 2:
+                                break;
+                            case 3:
+                                    Double commodity_price = 0.00;
+                                    commodity_price = Double.parseDouble(goods[3]);
+                                    order.setCommodityPrice(BigDecimal.valueOf(commodity_price)); //订单商品价格
+                                break;
+                            case 4:
+                                    int commodity_balance = -1;
+                                    System.out.println(Integer.parseInt(goods[4]));
+                                    commodity_balance = Integer.parseInt(goods[4])-1;//目前是默认每次修改一个
+                                    System.out.println(commodity_balance);
+                                    if (commodity_balance >= 0)
+                                    {
+                                        commodity.setCommodityBalance(commodity_balance); //商品库存数量
+                                    }else 
+                                        {
+                                            String failNumber = "数据库中商品不足";
+                                            model.addAttribute("failNumber", failNumber);
+                                            return "shoppingCar/ByGoodsReturn";//提示商品不足
+                                        }
+                                break;
+                            default:
+                                System.out.println("for循环j默认结束1");
+                                break;
+                        }
+                        System.out.println("for循环j结束,第"+j+"次");
+                    }
+                    //执行sql
+                    int shopR  = shoppingservice.updateStock(commodity); //更新库存sql
+                    int orderR = orderformservice.insertOrderForm(order);//插入订单sql
+                    
+                    if(shopR != 1 || orderR != 1){
+                    	String failNumber = "sql执行失败";
+                        model.addAttribute("failNumber", failNumber);
+                        return "shoppingCar/ByGoodsReturn";//提示商品不足
+                    }else{
+                    	System.out.println(i+"此次循环商品购买成功");
+                        falg = true;//此次循环商品购买成功
+                    }
+            }
+	       
+	        if (falg==true)
+            {
+                car.clear();
+                String successBackNews = "您已将购物车中的商品买回家了";
+                model.addAttribute("failNumber", successBackNews);
+                return "shoppingCar/ByGoodsReturn"; 
+            }
 	 }
+	        return "../../index";
+	 }
+	 
+	
 
 }
 

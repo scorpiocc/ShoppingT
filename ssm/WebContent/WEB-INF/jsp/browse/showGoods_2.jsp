@@ -138,7 +138,7 @@
   	         <form action="" method="post">
   	             <input type="hidden" name=currentPage value="<%=(currentPage-1) %>">
   	             <input type="hidden" name = keyWord  value = "<%=keyWord%>"> 
-  	             <input type="hidden" name = totalPages  value = ${totalPages}> 
+  	             <input type="hidden" name = totalPages  value = "${totalPages}"> 
   	             <input type="submit" value="上一页">
   	         </form>
   	     </td>
@@ -146,7 +146,7 @@
   	         <form action="" method="post">
   	             <input type="hidden" name=currentPage value="<%=(currentPage+1) %>">
   	             <input type="hidden" name = keyWord  value = "<%=keyWord%>"> 
-  	             <input type="hidden" name = totalPages  value = ${totalPages}> 
+  	             <input type="hidden" name = totalPages  value = "${totalPages}"> 
   	             <input type="submit" value="下一页">
   	         </form>
   	     </td>

@@ -24,11 +24,17 @@
   		
   	<br><br><br>
   	<center>
+  	<c:if test="${not empty goodsName}">
   	<font size=5 color=red><B>${goodsName}</B></font>&nbsp;已成功添加购物车
+  	</c:if>
+  	<c:if test="${not empty failNumber}">
+  	<font size=5 color=red><B>${failNumber}</B></font>&nbsp;
+  	</c:if>
+  	
   	<br><br><br>
   	<a href="<%=path %>/shopping/handler/4">返回继续购物</a>
   	&nbsp;&nbsp;
-  	<a href="<%=path %>/shopping/***">查看订单</a>
+  	<a href="<%=path %>/shopping/handler/3">查看订单</a>
   	</center>
    
   </body>

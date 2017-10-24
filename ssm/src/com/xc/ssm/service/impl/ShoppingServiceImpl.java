@@ -27,5 +27,10 @@ public class ShoppingServiceImpl implements ShoppingService {
 		return commoditymapper.selectCommodityByKey(KeyWord);
 	}
 
+	@Override
+	public int updateStock(Commodity commodity) {
+		return commoditymapper.updateStock(commodity);
+	}
+
 }
  

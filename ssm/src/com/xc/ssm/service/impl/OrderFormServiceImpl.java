@@ -24,4 +24,9 @@ public class OrderFormServiceImpl implements OrderFormService {
 		return orderformmapper.selectByUserName(username);
 	}
 
+	@Override
+	public int insertOrderForm(OrderForm orderform) {
+		return orderformmapper.insertOrderForm(orderform);
+	}
+
 }

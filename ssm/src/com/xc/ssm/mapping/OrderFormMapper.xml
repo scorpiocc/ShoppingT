@@ -33,15 +33,7 @@
     where ID = #{id,jdbcType=DECIMAL}
   </delete>
   
-  <insert id="insert" parameterType="com.xc.ssm.entity.OrderForm">
-    insert into ORDERFORM (ID, USERNAME, ORDERDATE, 
-      COMMODITY_NAME, COMMODITY_PRICE, SUM
-      )
-    values (#{id,jdbcType=DECIMAL}, #{username,jdbcType=VARCHAR}, #{orderdate,jdbcType=TIMESTAMP}, 
-      #{commodityName,jdbcType=VARCHAR}, #{commodityPrice,jdbcType=DECIMAL}, #{sum,jdbcType=DECIMAL}
-      )
-  </insert>
-  
+  <!-- 插入订单记录 -->
   <insert id="insertOrderForm" parameterType="com.xc.ssm.entity.OrderForm">
     insert into ORDERFORM
     <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -85,6 +77,18 @@
       </if>
     </trim>
   </insert>
+  
+  
+  <!-- <insert id="insert" parameterType="com.xc.ssm.entity.OrderForm">
+    insert into ORDERFORM (ID, USERNAME, ORDERDATE, 
+      COMMODITY_NAME, COMMODITY_PRICE, SUM
+      )
+    values (#{id,jdbcType=DECIMAL}, #{username,jdbcType=VARCHAR}, #{orderdate,jdbcType=TIMESTAMP}, 
+      #{commodityName,jdbcType=VARCHAR}, #{commodityPrice,jdbcType=DECIMAL}, #{sum,jdbcType=DECIMAL}
+      )
+  </insert> -->
+  
+  
   
   
  <!--  <update id="updateByPrimaryKey" parameterType="com.xc.ssm.entity.OrderForm">

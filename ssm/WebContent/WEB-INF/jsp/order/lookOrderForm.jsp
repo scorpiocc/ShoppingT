@@ -27,12 +27,12 @@
                 <th>购买数量</th>
             </tr>
         <% 
-            CachedRowSetImpl rowSet = goods.getRowSet();// 获取储存在模型中的行信息
+            /* CachedRowSetImpl rowSet = goods.getRowSet();// 获取储存在模型中的行信息
             if(rowSet==null)
             {
                 out.print("商品数据库中没有哦");
                 
-            }
+            } */
             
             int PageSize = goods.getFormpageSize();            //每页显示的记录数
             int totalPages = 1;
@@ -79,12 +79,14 @@
          <td>
              <form action="" method="post">
                  <input type="hidden" name=currentPage value="<%= (currentPage-1) %>">
+                 <input type="hidden" name = FormTotalPages  value = ${FormTotalPages}> 
                  <input type="submit" value="上一页">
              </form>
          </td>
          <td>
              <form action="" method="post">
                  <input type="hidden" name=currentPage value="<%= (currentPage+1) %>">
+                 <input type="hidden" name = FormTotalPages  value = ${FormTotalPages}> 
                  <input type="submit" value="下一页">
              </form>
          </td>

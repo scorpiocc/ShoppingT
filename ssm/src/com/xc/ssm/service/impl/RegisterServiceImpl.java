@@ -24,13 +24,11 @@ public class RegisterServiceImpl implements RegisterService{
 
 	@Override
 	public int updataVip(Vip vip) {
-		
 		return registermapper.updateByPrimaryKeySelective(vip);
 	}
 
 	@Override
 	public Vip selectByUser(String username) {
-		
 		return registermapper.selectByUser(username);
 	}
 

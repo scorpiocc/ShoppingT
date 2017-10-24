@@ -32,7 +32,8 @@
             
             <%
             String detail = request.getParameter("detail");
-            String shopCarButton = "<form action='lyons.goods/PutGoodsToCar' method='post'>"+
+            String totals = "<form action='";
+            String shopCarButton = "/shopping/ToCar' method='post'>"+
                                    "<input type='hidden' name='GoodsCar' value="+detail+">"+
                                    "<input type='submit' value='加入购物车'></form>";
             String[] details = detail.split(",");
@@ -41,7 +42,7 @@
 	            {%>
 		               <td><%= details[i]%></td>
 	            <%}%>
-	                   <td><%= shopCarButton%></td>
+	                   <td><%=totals %><%=path %><%=shopCarButton %></td>
              </tr>
          </table>
          <br>
