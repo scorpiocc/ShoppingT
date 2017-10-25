@@ -6,7 +6,7 @@
   <head>
     <base href="<%=basePath%>">
     
-    <title>My JSP 'showDetail.jsp' starting page</title>
+    <title>商品详情</title>
     
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">

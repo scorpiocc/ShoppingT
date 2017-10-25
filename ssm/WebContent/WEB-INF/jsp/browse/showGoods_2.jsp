@@ -51,7 +51,6 @@
 			if(request.getParameter("totalPages") != null){
 			  totalPages =Integer.parseInt(request.getParameter("totalPages"));  //总页数
 			}
-			//out.println("总页数"+totalPages);
 			int currentPage = goods.getCurrentPage();      //当前页码数
 			
 			 //检查是否用户自定义了页数

@@ -19,21 +19,37 @@ public class Goods
 	private int pageSize = 5;	//浏览商品每页显示多少条记录(默认为5条)
 	private int FormpageSize = 5;   //订单默认显示条数
 	private int currentPage = 1;//当前页数
+	private int FormcurrentPage = 1;//订单当前页数
 	private int totalRecord = 1;//总记录数
 	private int totalPage = 1;	 //总页数
 	
 	public Goods(){}
 	
 	public Goods(CachedRowSetImpl rowSet, int pageSize, int formpageSize,
-			int currentPage, int totalRecord, int totalPage) {
+			int currentPage, int formcurrentPage, int totalRecord, int totalPage) {
 		super();
 		this.rowSet = rowSet;
 		this.pageSize = pageSize;
-		this.FormpageSize = formpageSize;
+		FormpageSize = formpageSize;
 		this.currentPage = currentPage;
+		FormcurrentPage = formcurrentPage;
 		this.totalRecord = totalRecord;
 		this.totalPage = totalPage;
 	}
+
+
+
+	public int getFormcurrentPage() {
+		return FormcurrentPage;
+	}
+
+
+
+	public void setFormcurrentPage(int formcurrentPage) {
+		FormcurrentPage = formcurrentPage;
+	}
+
+
 
 	public CachedRowSetImpl getRowSet()
     {

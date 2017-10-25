@@ -36,7 +36,7 @@ String path1 = request.getContextPath();
 	width:120px;
 	margin-right:1px;
 	text-align:center;
-	background:url(/ssm/image/page/nav.png);
+	background:url(<%=path1%>/image/page/nav.png);
  }
 .nav li a.on, .nav li a:hover
 	{

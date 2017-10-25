@@ -134,11 +134,11 @@ public class HandlerShopping {
 			//修改显示条数
 			FormPageSize = orderform.size(); //获取数据总长度
 			System.out.println("获取到"+FormPageSize+"条结果");
-			if(request.getParameter("newPageSize")!=null){
-				FormcurrentPage =  Integer.parseInt(request.getParameter("newPageSize"));
+			if(request.getParameter("ordernewPageSize")!=null){
+				FormcurrentPage =  Integer.parseInt(request.getParameter("ordernewPageSize"));
 				 System.out.println("当前订单显示条数"+FormcurrentPage);
 			}else{
-				FormcurrentPage = goods.getPageSize();
+				FormcurrentPage = goods.getFormpageSize();
 				 System.out.println("显示订单默认条数"+FormcurrentPage);
 			}
 			int  Formtotalpages  =  (int) Math.ceil(FormPageSize/FormcurrentPage);
@@ -167,7 +167,7 @@ public class HandlerShopping {
 		    totalPages  =  (int) Math.ceil(PageSize/currentPage);
 			model.addAttribute("totalPages",totalPages);
 			 
-			
+			System.out.println("跳转showGood_2");
 			return "browse/showGoods_2";
 			
 		default:

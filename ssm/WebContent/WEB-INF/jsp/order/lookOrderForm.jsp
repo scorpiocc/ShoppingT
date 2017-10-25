@@ -34,25 +34,26 @@
                 
             } */
             
-            int PageSize = goods.getFormpageSize();            //每页显示的记录数
-            int totalPages = 1;
+            int orderPageSize = goods.getFormpageSize();            //每页显示的记录数
+            out.println("每页显示的记录数"+orderPageSize);
+            int FormtotalPages = 1;
 			if(request.getParameter("FormTotalPages") != null){
-			  totalPages =Integer.parseInt(request.getParameter("FormTotalPages"));  //总页数
+				FormtotalPages =Integer.parseInt(request.getParameter("FormTotalPages"));  //总页数
 			}
             int currentPage = goods.getCurrentPage();      //当前页码数
             
             
             //检查是否用户自定义了页数
-            if(request.getParameter("newPageSize")!=null)
+            if(request.getParameter("ordernewPageSize")!=null)
             {
-               PageSize = Integer.parseInt(request.getParameter("newPageSize"));
+            	orderPageSize = Integer.parseInt(request.getParameter("ordernewPageSize"));
                currentPage = 1;//从第一页开始显示
             }
             //检查是否用户点击了下、上一页操作
-            if(request.getParameter("currentPage") != null)
+            if(request.getParameter("FormcurrentPage") != null)
             {
-               int newCurrentPageInt = Integer.parseInt(request.getParameter("currentPage"));
-               if(newCurrentPageInt <= totalPages && newCurrentPageInt>0)//下一页必须小于总页数，大于0
+               int newCurrentPageInt = Integer.parseInt(request.getParameter("FormcurrentPage"));
+               if(newCurrentPageInt <= FormtotalPages && newCurrentPageInt>0)//下一页必须小于总页数，大于0
                {
                    currentPage = newCurrentPageInt;
                }else
@@ -60,9 +61,12 @@
                        currentPage = goods.getCurrentPage();//页数大于总页数或者小于零后，还原数据
                    }
             }
+            goods.setCurrentPage(currentPage);  //更新当前页码数
+  			goods.setFormpageSize(orderPageSize);        //更新每页显示记录数
+  			goods.setTotalPage(FormtotalPages);		//更新总页数
             
         %> 
-        <c:forEach items="${OrderForm}" var="order" varStatus="st" begin="<%=(currentPage-1)*PageSize %>" end="<%=((PageSize-1)+(currentPage-1)*PageSize) %>">
+        <c:forEach items="${OrderForm}" var="order" varStatus="st" begin="<%=(currentPage-1)*orderPageSize %>" end="<%=((orderPageSize-1)+(currentPage-1)*orderPageSize) %>">
   			<c:if test="${st.count%2==0}"><tr bgcolor="#FFE4B5"></c:if>
   			 <c:if test="${st.count%2==1}"><tr bgcolor="#FFFACD"></c:if>	
   			 
@@ -78,15 +82,15 @@
      <tr>
          <td>
              <form action="" method="post">
-                 <input type="hidden" name=currentPage value="<%= (currentPage-1) %>">
-                 <input type="hidden" name = FormTotalPages  value = ${FormTotalPages}> 
+                 <input type="hidden" name=FormcurrentPage value="<%= (currentPage-1) %>">
+                 <input type="hidden" name = FormTotalPages  value = "${FormTotalPages}"> 
                  <input type="submit" value="上一页">
              </form>
          </td>
          <td>
              <form action="" method="post">
-                 <input type="hidden" name=currentPage value="<%= (currentPage+1) %>">
-                 <input type="hidden" name = FormTotalPages  value = ${FormTotalPages}> 
+                 <input type="hidden" name=FormcurrentPage value="<%= (currentPage+1) %>">
+                 <input type="hidden" name = FormTotalPages  value = "${FormTotalPages}"> 
                  <input type="submit" value="下一页">
              </form>
          </td>
@@ -95,7 +99,7 @@
      <tr>
          <td><BR>
              <form action="" method="post">
-                总计：${fn:length(OrderForm)}条记录.每页显示<input type="text" name="newPageSize" value="<%= PageSize %>" size="2">条.
+                总计：${fn:length(OrderForm)}条记录.每页显示<input type="text" name="ordernewPageSize" value="<%= orderPageSize %>" size="2">条.
                      <input type="submit" value="确定">
              </form>
          </td>
